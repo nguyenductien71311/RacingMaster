@@ -1,7 +1,7 @@
 from future.moves import tkinter
 from functools import partial
 from typing import TextIO
-
+from pygame.locals import *
 from tkinter import *
 from pygame import mixer as sounds, FULLSCREEN
 import random
@@ -11,7 +11,7 @@ import tkinter.simpledialog
 import pygame
 import pygame_menu
 from pygame_menu.themes import Theme
-
+import os, sys
 
 pygame.init()
 
@@ -34,10 +34,30 @@ MyTheme = Theme(
 )
 
 
+sl = []
+try:
+    f = open("shopping2.txt", "r")
+    for line in f:
+        sl.append(line.strip())
+    f.close()
+except:
+    pass
+
+def saveList():
+    f = open("shopping2.txt", "w")
+    for item in sl:
+        f.write(item + "\n")
+    f.close()
+
+
+
 def draw_background(surface):
     background_image = pygame_menu.baseimage.BaseImage(image_path='nen.png')
     background_image.draw(surface)
 
+def draw_backgroundshop(surface):
+    background_image = pygame_menu.baseimage.BaseImage(image_path='nenshop.jpg')
+    background_image.draw(surface)
 
 def start_the_game():
     # Horse Race Betting game by Paul and Ben Barber
@@ -531,8 +551,29 @@ def rank():
     pass
 
 def shop():
-    # do
-    pass
+    x = 400
+    y = 100
+    yellow = (192,255,62)
+    font = pygame.font.SysFont('consolas', 30)
+    textSurface = font.render("Welcome to my shop", True, yellow)
+    quitshop = font.render("Press ESC to get out", True, yellow)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    drawmenu()
+        draw_backgroundshop(DISPLAYSURF)
+        DISPLAYSURF.blit(textSurface, (600, 50))
+        DISPLAYSURF.blit(quitshop, (600, 700))
+        for item in sl:
+            ITEM = font.render(item, True, yellow)
+            DISPLAYSURF.blit(ITEM, (x, y))
+            y = y + 40
+        else:
+            y = 100
+        pygame.display.update()
+
 
 
 MyTheme.set_background_color_opacity(0.5)
