@@ -1,5 +1,6 @@
-bua cham
-bua nhanh
-bua ve dich
-bua ve vach xuat phat
-bua dung yen
+1.bua nhanh
+2.bua cham
+3.bua ve dich
+4.bua quay ve
+5.bua choang
+6.bua quay lui
