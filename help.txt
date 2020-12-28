@@ -1,0 +1,17 @@
+*******************HUONG DAN GAME RACE MASTER*******************
+#Khi het tien, ban co the tham gia mini game do vui de co them tien, 1 cau dung ban duoc 1,000,000VND.
+#Tren duong dua se co nhung chuong ngai vat nhu da hoac o ga gay can tro trong qua trinh dua.
+#Se co cac loai bua giup hoac gay can tro trong qua trinh choi
+1: Bua nhanh-giup xe ban chay nhanh len
+2: Bua cham-khien xe ban chay cham lai
+3: Bua choang-ban se bi bat dong trong 1 vai giay
+4: Bua quay lui-xe ban se quay dau va chay nguoc lai trong mot vai giay va quay lai dung huong
+5: Bua quay ve-xe ban se quay lai vi tri xuat phat
+6: Bua ve dich-xe ban se lap tuc ve dich va gianh chien thang
+
+********************HUONG DAN SU DUNG SHOP********************
+#Su dung cac phim so tu 1 den 6 de mua cac loai bua
+#Khi nhan phim he thong se tu mua (neu nhan nham se khong hoan tra so tien da mua)
+#Nhan phim ESC de thoat khoi shop
+
+*****************NHAN ESC DE QUAY VE MENU CHINH*****************

@@ -1,7 +1,7 @@
 from future.moves import tkinter
 from functools import partial
 from typing import TextIO
-
+from pygame.locals import *
 from tkinter import *
 from pygame import mixer as sounds, FULLSCREEN
 import random
@@ -11,7 +11,7 @@ import tkinter.simpledialog
 import pygame
 import pygame_menu
 from pygame_menu.themes import Theme
-
+import os, sys
 
 pygame.init()
 
@@ -21,23 +21,107 @@ pygame.display.set_caption("Race Master")
 
 
 MyTheme = Theme(
-    background_color=(56, 4, 75),
+    #background_color=(56, 4, 75),
+    background_color=(151, 255, 255),
     scrollbar_shadow=True,
-    scrollbar_slider_color=(200, 46, 49),
+    scrollbar_slider_color=(0, 191, 255),
     scrollbar_slider_pad=2,
     scrollbar_thick=14,
     selection_color=(200, 46, 49),
-    title_background_color=(120, 0, 98),
-    title_font_color=(0, 178, 191),
+    title_background_color=(0, 191, 255),
+    title_font_color=(220, 20, 60),
     title_shadow=True,
     widget_font_color=(0, 178, 191),
 )
 
+bg = []
+sl = []
+cast = []
+help = []
+try:
+    f = open("shopping2.txt", "r")
+    for line in f:
+        sl.append(line.strip())
+    f.close()
+except:
+    pass
 
+try:
+    g = open("cast.txt", "r")
+    for m in g:
+        cast.append(m.strip())
+    g.close()
+except:
+    pass
+
+try:
+    h = open("help.txt", "r")
+    for n in h:
+        help.append(n.strip())
+    h.close()
+except:
+    pass
+
+try:
+    b = open("LOGO.txt", "r")
+    for i in b:
+        bg.append(i.strip())
+    b.close()
+except:
+    pass
+
+def saveList(file):
+    f = open(file, "w")
+    for item in sl:
+        f.write(item + "\n")
+    f.close()
+'''
+class Player(object):
+    def __init__(self, name, money, fast, slow, finishline, startline, stop, returncar):
+        self.name = name
+        self.money = money
+        self.fast = fast
+        self.slow = slow
+        self.finishline = finishline
+        self.startline = startline
+        self.stop = stop
+        self.returncar = returncar
+
+
+playerlist = []
+try:
+    with open("saveplayerlist.txt", "r") as f:
+        for line in f:
+            data = line.strip().split()
+            playerlist.append(Player(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]))
+        f.close()
+except:
+    pass
+'''
 def draw_background(surface):
-    background_image = pygame_menu.baseimage.BaseImage(image_path='nen.png')
-    background_image.draw(surface)
+    anime = pygame.image.load('animebg.png')
+    #background_image.draw(surface),background_image = pygame_menu.baseimage.BaseImage(image_path='nen.png')
+    surface.fill((255,255,255))
+    font = pygame.font.SysFont('consolas', 22)
+    y = 80
+    for line in bg:
+        LINE = font.render(line, True, (0,250,154))
+        surface.blit(LINE, (120, y))
+        y = y + 10
+    surface.blit(anime,(50,200))
 
+
+def draw_backgroundshop(surface):
+    surface.fill((255, 255, 255))
+    animeshop1 = pygame.image.load('shopbg.png')
+    animeshop2 = pygame.image.load('shopbg2.png')
+    surface.blit(animeshop1, (0, 350))
+    surface.blit(animeshop2, (1040, 350))
+
+def draw_backgroundhelp(surface):
+    surface.fill((255, 255, 255))
+    animehelp = pygame.image.load('helpbg.jpg')
+    surface.blit(animehelp, (950, 250))
 
 def start_the_game():
     # Horse Race Betting game by Paul and Ben Barber
@@ -183,6 +267,7 @@ def start_the_game():
             elif (keyevent.keysym == 'Escape'):
                 escape_press = escape_press + 1
             if escape_press > 1:
+                drawmenu()
                 exit(0)
             keypressed = False
 
@@ -531,10 +616,69 @@ def rank():
     pass
 
 def shop():
-    # do
-    pass
+    y1 = 120
+    y2 = 120
+    #y3 = 400
+    yellow = (192,255,62)
+    font = pygame.font.SysFont('consolas', 30)
+    textSurface = font.render("Welcome to my shop", True, yellow)
+    quitshop = font.render("Press ESC to get out", True, yellow)
+    draw_backgroundshop(DISPLAYSURF)
+    DISPLAYSURF.blit(textSurface, (600, 50))
+    DISPLAYSURF.blit(quitshop, (600, 700))
+    for item in sl:
+        ITEM = font.render(item, True, yellow)
+        DISPLAYSURF.blit(ITEM, (400, y1))
+        y1 = y1 + 40
+    for money in cast:
+        CAST = font.render(money, True, yellow)
+        DISPLAYSURF.blit(CAST, (1000, y2))
+        y2 = y2 + 40
+    '''for i in playerlist:
+        I = font.render(i, True, yellow)
+        DISPLAYSURF.blit(I, (1200, y3))
+        y3 = y3 + 40'''
+    while True:
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    drawmenu()
+                if event.key == K_1:
+                    pass
+                if event.key == K_2:
+                    pass
+                if event.key == K_3:
+                    pass
+                if event.key == K_4:
+                    pass
+                if event.key == K_5:
+                    pass
+                if event.key == K_6:
+                    pass
+        pygame.display.update()
 
 
+
+def helping():
+    y = 30
+    green = (0, 250, 154)
+    font = pygame.font.SysFont('consolas', 20)
+    draw_backgroundhelp(DISPLAYSURF)
+    for a in help:
+        HELP = font.render(a, True, green)
+        DISPLAYSURF.blit(HELP, (50, y))
+        y = y + 40
+    while True:
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    drawmenu()
+
+        pygame.display.update()
+
+
+
+'''
 MyTheme.set_background_color_opacity(0.5)
 help = pygame_menu.Menu(800, 1500, 'Help', menu_position=(50, 50), theme=MyTheme)
 help.add_label('_______HUONG DAN GAME RACE MASTER_______')
@@ -548,7 +692,7 @@ help.add_label('3: Bua choang-ban se bi bat dong trong 1 vai giay')
 help.add_label('4: Bua quay lui-xe ban se quay dau va chay nguoc lai trong mot vai giay va quay lai dung huong')
 help.add_label('5: Bua quay ve-xe ban se quay lai vi tri xuat phat')
 help.add_label('6: Bua ve dich-xe ban se lap tuc ve dich va gianh chien thang')
-
+'''
 
 def option():
     #
@@ -556,8 +700,8 @@ def option():
 
 
 def drawmenu():
-    MyTheme.set_background_color_opacity(0.5)
-    menu = pygame_menu.Menu(800, 1500, 'RACING', menu_position=(50, 50), theme=MyTheme)
+    #MyTheme.set_background_color_opacity(0.5)
+    menu = pygame_menu.Menu(500, 500, 'RACING', menu_position=(90, 70), theme=MyTheme)
 
     #menu.add_text_input('Player:', default=' ')
     menu.get_input_data(recursive=True)
@@ -566,15 +710,20 @@ def drawmenu():
     menu.add_button("Ranking", rank)
     menu.add_button("Shop", shop)
     menu.add_button("Option", option)
-    menu.add_button(help.get_title(), help)
+    menu.add_button("Help", helping)
+    #menu.add_button(help.get_title(), help)
     menu.add_button('Quit', pygame_menu.events.EXIT)
     menu.center_content()
+    sounds.music.load("menu.wav")
+    sounds.music.play()
+    menu.mainloop(surface=DISPLAYSURF, bgfun=partial(draw_background, DISPLAYSURF), fps_limit=120)
 
-    menu.mainloop(surface=DISPLAYSURF, bgfun=partial(draw_background, DISPLAYSURF), fps_limit=60)
 
 
 def main():
+
     drawmenu()
+
 
 
 main()
