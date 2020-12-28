@@ -15,8 +15,6 @@ import os, sys
 
 pygame.init()
 
-s_w = Tk().winfo_width()
-s_h = Tk().winfo_height()
 
 # DISPLAYSURF = pygame.display.set_mode((s_w, s_h), FULLSCREEN)
 DISPLAYSURF = pygame.display.set_mode((1280 , 900))
@@ -216,7 +214,7 @@ def start_the_game():
     class Punter:
         def __init__(self, name):
             self.name = name
-            self.total = 1000  # how much money they have left # random.randint(0,1000) #
+            self.total = 100  # how much money they have left # random.randint(0,100) #
             self.pick = -1  # which horse they have picked, 0-6, -1=not made a pick
             self.stake = 0  # how much they have bet on the horse+row_spacing
             self.totalwinnings = 0  # running total of all winnings
@@ -446,7 +444,7 @@ def start_the_game():
         # clear the scene
         canvas.delete("all")
         # draw the scene
-        canvas.create_rectangle(0, 0, screen_width, 7 * 2 * row_spacing + 65, fill="green")
+        canvas.create_rectangle(0, 0, screen_width, 7 * 2 * row_spacing + 65, fill="gray")
 
         canvas.create_line(finish_pos - horse_step, 1 * 2 * row_spacing - 30, finish_pos - horse_step,
                            7 * 2 * row_spacing + 65, width=5, fill="black")
@@ -459,7 +457,7 @@ def start_the_game():
         canvas.create_line(finish_pos - horse_step, 7 * 2 * row_spacing + 30 + 16, finish_pos - horse_step,
                            7 * 2 * row_spacing + 65, width=5, fill="gold")
 
-        canvas.create_rectangle(0, 8 * 2 * row_spacing, screen_width, screen_height, fill="white")
+        canvas.create_rectangle(0, 8 * 2 * row_spacing, screen_width, screen_height, fill="light green")
         pos = row_spacing * 17
         canvas.create_text(screen_width / 2, pos, text="================================", fill="red", font=myfont,
                            justify="center")
@@ -635,7 +633,7 @@ def shop():
         y1 = y1 + 40
     for money in cast:
         CAST = font.render(money, True, yellow)
-        DISPLAYSURF.blit(CAST, (1000, y2))
+        DISPLAYSURF.blit(CAST, (100, y2))
         y2 = y2 + 40
     '''for i in playerlist:
         I = font.render(i, True, yellow)
