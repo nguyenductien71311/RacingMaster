@@ -1,4 +1,4 @@
-from future.moves import tkinter
+# from future.moves import tkinter
 from functools import partial
 from typing import TextIO
 from pygame.locals import *
@@ -15,7 +15,11 @@ import os, sys
 
 pygame.init()
 
-DISPLAYSURF = pygame.display.set_mode((1500, 800), FULLSCREEN)
+s_w = Tk().winfo_width()
+s_h = Tk().winfo_height()
+
+# DISPLAYSURF = pygame.display.set_mode((s_w, s_h), FULLSCREEN)
+DISPLAYSURF = pygame.display.set_mode((1280 , 900))
 pygame.display.set_caption("Race Master")
 
 
@@ -313,7 +317,7 @@ def start_the_game():
         horselist.append(horse)
         horse = HorseSprite(canvas, 6, "Cyan Runner", "cyan")
         horselist.append(horse)
-        horse = HorseSprite(canvas, 7, "White Flash", "white")
+        horse = HorseSprite(canvas, 7, "Green Flash", "green")
         horselist.append(horse)
 
     def DisplayCash(canvas, title="LEADER BOARD", wait=False):
@@ -321,7 +325,7 @@ def start_the_game():
         # clear the scene
         canvas.delete("all")
         # draw the scene
-        canvas.create_rectangle(0, 0, screen_width, screen_height, fill="black")
+        canvas.create_rectangle(0, 0, screen_width, screen_height, fill="white")
         canvas.create_text(screen_width / 2, row_spacing, text="--------------------------------", fill="cyan",
                            font=myfont, justify="center")
         canvas.create_text(screen_width / 2, row_spacing * 2, text="* " + title + " *", fill="magenta", font=myfont,
@@ -369,7 +373,7 @@ def start_the_game():
         # clear the scene
         canvas.delete("all")
         # draw the scene
-        canvas.create_rectangle(0, 0, screen_width, screen_height, fill="dark green")
+        canvas.create_rectangle(0, 0, screen_width, screen_height, fill="white")
         canvas.create_text(screen_width / 2, row_spacing, text="--------------------------------", fill="red",
                            font=myfont, justify="center")
         canvas.create_text(screen_width / 2, row_spacing * 2, text="* STARTING PRICES *", fill="yellow", font=myfont,
@@ -411,7 +415,7 @@ def start_the_game():
                 punter.stake = -1
                 question1 = canvas.create_text(screen_width / 2, pos + row_spacing * 4,
                                                text=punter.name + ", you have £" + str(
-                                                   punter.total) + ". Pick a horse 1-7", fill="white", font=myfont,
+                                                   punter.total) + ". Pick a horse 1-7", fill="blue", font=myfont,
                                                justify="center")
                 while (punter.pick < 0 or punter.pick > 6):
                     answer1 = canvas.create_text(screen_width / 2, pos + row_spacing * 5.2, text="", fill="orange",
@@ -419,7 +423,7 @@ def start_the_game():
                     punter.pick = WaitForInteger(canvas, answer1) - 1
                     canvas.delete(answer1)
                 question2 = canvas.create_text(screen_width / 2, pos + row_spacing * 7,
-                                               text="How much on " + horselist[punter.pick].name + "?", fill="white",
+                                               text="How much on " + horselist[punter.pick].name + "?", fill="blue",
                                                font=myfont, justify="center")
                 while (punter.stake < 0 or punter.stake > punter.total):
                     answer2 = canvas.create_text(screen_width / 2, pos + row_spacing * 8.2, text="", fill="orange",
@@ -455,7 +459,7 @@ def start_the_game():
         canvas.create_line(finish_pos - horse_step, 7 * 2 * row_spacing + 30 + 16, finish_pos - horse_step,
                            7 * 2 * row_spacing + 65, width=5, fill="gold")
 
-        canvas.create_rectangle(0, 8 * 2 * row_spacing, screen_width, screen_height, fill="dark green")
+        canvas.create_rectangle(0, 8 * 2 * row_spacing, screen_width, screen_height, fill="white")
         pos = row_spacing * 17
         canvas.create_text(screen_width / 2, pos, text="================================", fill="red", font=myfont,
                            justify="center")
@@ -557,7 +561,7 @@ def start_the_game():
         # clear the scene
         canvas.delete("all")
         # draw the scene
-        canvas.create_rectangle(0, 0, screen_width, screen_height, fill="black")
+        canvas.create_rectangle(0, 0, screen_width, screen_height, fill="white")
         canvas.create_text(screen_width / 2, row_spacing, text="--------------------------------", fill="cyan",
                            font=myfont, justify="center")
         canvas.create_text(screen_width / 2, row_spacing * 2, text="* GAME OVER *", fill="magenta", font=myfont,
@@ -572,7 +576,7 @@ def start_the_game():
             canvas.create_text(screen_width / 2, pos, text=message, fill="yellow", font=myfont, justify="center")
             pos = pos + row_spacing * 2
         canvas.create_text(screen_width / 2, screen_height - 100, text="Press any key to play again or Esc to exit.",
-                           fill="white", font=myfont, justify="center")
+                           fill="blue", font=myfont, justify="center")
         sounds.music.load("yankee_slow.mp3")
         sounds.music.play()
         WaitForKeyPress(canvas)
