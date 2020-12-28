@@ -99,7 +99,7 @@ except:
     pass
 '''
 def draw_background(surface):
-    anime = pygame.image.load('animebg.png')
+    anime = pygame.image.load('./assets/animebg.png')
     #background_image.draw(surface),background_image = pygame_menu.baseimage.BaseImage(image_path='nen.png')
     surface.fill((255,255,255))
     font = pygame.font.SysFont('consolas', 22)
@@ -113,14 +113,14 @@ def draw_background(surface):
 
 def draw_backgroundshop(surface):
     surface.fill((255, 255, 255))
-    animeshop1 = pygame.image.load('shopbg.png')
-    animeshop2 = pygame.image.load('shopbg2.png')
+    animeshop1 = pygame.image.load('./assets/shopbg.png')
+    animeshop2 = pygame.image.load('./assets/shopbg2.png')
     surface.blit(animeshop1, (0, 350))
     surface.blit(animeshop2, (1040, 350))
 
 def draw_backgroundhelp(surface):
     surface.fill((255, 255, 255))
-    animehelp = pygame.image.load('helpbg.jpg')
+    animehelp = pygame.image.load('./assets/helpbg.jpg')
     surface.blit(animehelp, (950, 250))
 
 def start_the_game():
@@ -142,7 +142,7 @@ def start_the_game():
     # tk.resizable(False, False)
     # tk.attributes("-topmost", True)
     tk.attributes("-fullscreen", True)
-    tk.config(cursor='none')
+    #tk.config(cursor='none')
     tk.update()
 
     screen_width = tk.winfo_width()  # 1280
@@ -175,7 +175,7 @@ def start_the_game():
     class HorseSprite:
         def __init__(self, canvas, number, name, colour):
             self.canvas = canvas
-            self.images = [PhotoImage(file="legsin.gif"), PhotoImage(file="legsout.gif")]
+            self.images = [PhotoImage(file="./assets/legsin.gif"), PhotoImage(file="./assets/legsout.gif")]
             # make the image bigger
             zoom_factor = 5
             self.images[0] = self.images[0].zoom(zoom_factor, zoom_factor)
@@ -267,7 +267,6 @@ def start_the_game():
             elif (keyevent.keysym == 'Escape'):
                 escape_press = escape_press + 1
             if escape_press > 1:
-                drawmenu()
                 exit(0)
             keypressed = False
 
