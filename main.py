@@ -16,8 +16,7 @@ import os, sys
 pygame.init()
 
 
-# DISPLAYSURF = pygame.display.set_mode((s_w, s_h), FULLSCREEN)
-DISPLAYSURF = pygame.display.set_mode((1280 , 900))
+DISPLAYSURF = pygame.display.set_mode((1500 , 900), FULLSCREEN)
 pygame.display.set_caption("Race Master")
 
 
@@ -612,10 +611,6 @@ def minigame():
     # ham
     pass
 
-
-def rank():
-    pass
-
 def shop():
     y1 = 120
     y2 = 120
@@ -633,7 +628,7 @@ def shop():
         y1 = y1 + 40
     for money in cast:
         CAST = font.render(money, True, yellow)
-        DISPLAYSURF.blit(CAST, (100, y2))
+        DISPLAYSURF.blit(CAST, (900, y2))
         y2 = y2 + 40
     '''for i in playerlist:
         I = font.render(i, True, yellow)
@@ -695,7 +690,7 @@ help.add_label('5: Bua quay ve-xe ban se quay lai vi tri xuat phat')
 help.add_label('6: Bua ve dich-xe ban se lap tuc ve dich va gianh chien thang')
 '''
 
-def option():
+def history():
     #
     pass
 
@@ -708,9 +703,8 @@ def drawmenu():
     menu.get_input_data(recursive=True)
     menu.add_button('Play game', start_the_game)
     menu.add_button("Mini Game", minigame)
-    menu.add_button("Ranking", rank)
     menu.add_button("Shop", shop)
-    menu.add_button("Option", option)
+    menu.add_button("History", history)
     menu.add_button("Help", helping)
     #menu.add_button(help.get_title(), help)
     menu.add_button('Quit', pygame_menu.events.EXIT)
